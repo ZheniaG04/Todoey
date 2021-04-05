@@ -41,12 +41,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Todoey" id="w91-mn-LXt">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="cQh-kR-r3E">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="K2K-5P-iX5" id="A8y-8l-XzG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="v4g-Th-UH3" id="g3Y-iT-mGk"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E3Y-KT-g9j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -57,15 +59,19 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BPi-t3-SIJ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aqC-Io-JAK">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="aqC-Io-JAK">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor"/>
                         <color key="barTintColor" systemColor="systemBlueColor"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="le1-0t-xSe">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="DQM-sa-HeM" kind="relationship" relationship="rootViewController" id="08f-oR-3hQ"/>
                     </connections>
@@ -99,7 +105,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Todoey" id="kgE-2O-0Cx">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qti-5d-e1G">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="DQM-sa-HeM" id="0Qx-Gy-d0K"/>
                             </connections>

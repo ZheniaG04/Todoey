@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class CategoryViewController: SwipeTableViewController {
     
@@ -17,6 +18,15 @@ class CategoryViewController: SwipeTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCategories()
+        tableView.separatorStyle = .none
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let navBar = navigationController?.navigationBar else {
+            fatalError("Navigation bar does not exist")
+        }
+        
+        navBar.backgroundColor = UIColor(hexString: "1D9BF6")
     }
     
     //MARK: - TableView Datasource Methods
@@ -27,7 +37,15 @@ class CategoryViewController: SwipeTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        cell.textLabel?.text = categoryArray?[indexPath.row].name ?? "No Categories Added"
+        if let categoryForTheCell = categoryArray?[indexPath.row] {
+            cell.textLabel?.text = categoryForTheCell.name
+            
+            guard let categoryColor = UIColor(hexString: categoryForTheCell.colorHexValue) else {
+                fatalError()
+            }
+            cell.backgroundColor = categoryColor
+            cell.textLabel?.textColor = ContrastColorOf(categoryColor, returnFlat: true)
+        }
         return cell
     }
     //MARK: - TableView Delegate Methods
@@ -55,7 +73,7 @@ class CategoryViewController: SwipeTableViewController {
                         
             let newCategory = Category()
             newCategory.name = textField.text!
-            
+            newCategory.colorHexValue = UIColor.randomFlat().hexValue()
             self.save(category: newCategory)
         }
         
@@ -84,9 +102,7 @@ class CategoryViewController: SwipeTableViewController {
     }
     
     func loadCategories() {
-    
         categoryArray = realm.objects(Category.self)
-        
         tableView.reloadData()
     }
     
